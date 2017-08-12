@@ -1,17 +1,21 @@
 defmodule PhoenixHisto.Mixfile do
   use Mix.Project
 
+  @version "1.0.0"
+
   def project do
     [
       app: :phoenix_histo,
-      version: "0.1.0",
+      version: @version,
       elixir: "~> 1.3",
-      start_permanent: Mix.env == :prod,
       deps: deps(),
       description: description(),
       package: package(),
       name: "PhoenixHisto",
       source_url: "https://github.com/lukaszsamson/phoenix_histo",
+      docs: [extras: ["README.md"], main: "readme",
+            source_ref: "v#{@version}",
+            source_url: "https://github.com/elixir-plug/plug"]]
     ]
   end
 
@@ -22,6 +26,7 @@ defmodule PhoenixHisto.Mixfile do
   defp deps do
     [
       {:phoenix, "~> 1.2"},
+      {:ex_doc, "~> 0.14", only: :docs},
     ]
   end
 

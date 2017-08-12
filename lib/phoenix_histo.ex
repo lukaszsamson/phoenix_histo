@@ -2,11 +2,11 @@ defmodule PhoenixHisto do
   @moduledoc """
   A plug for handling client side routing ith History Api
   It rewrites requests for client side routes to `index.html` file.
-  ## Requests exempt from fallback
+  ## Requests exempt from rewrite
   The fallback algorithm is limited only to certain requests. In particular
-  it will not fallback if:
+  it will not rewrite if:
     * request method is not `GET` or `HEAD`.
-    * it is a file request, e.g. `"/path/file.ext"`; not that if `PhoenixHisto`
+    * it is a file request, e.g. `"/path/file.ext"`; note that if `PhoenixHisto`
       is plugged after `Plug.Static` and we get a file request than most likely
       the file does not exist and `404` response will be returned
     * the client does not accept `text/html` response MIME type
@@ -17,7 +17,7 @@ defmodule PhoenixHisto do
     * `:blacklist` - list of path prefixes exempt from fallback algorithm
       (defaults to `[]`).
     * `:static_opts` - options to forward to `Plug.Static` (required), refer to
-      `Plug.Static` docs`. Note that `:only` and `:only_matching`
+      `Plug.Static` docs. Note that `:only` and `:only_matching`
       are not respected.
   ## Examples
   The best place to mount this plug is in `Phoenix.Endpoint`, just after all
