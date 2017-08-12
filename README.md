@@ -1,6 +1,6 @@
 # PhoenixHisto
 
-A plug for handling client side routes in Phoenix
+A plug for handling client side routing in Phoenix, a.k.a. History Api fallback.
 
 ## Rationale
 

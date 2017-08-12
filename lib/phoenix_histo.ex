@@ -1,6 +1,6 @@
 defmodule PhoenixHisto do
   @moduledoc """
-  A plug for handling client side routing ith History Api
+  A plug for handling client side routing in Phoenix, a.k.a. History Api fallback.
   It rewrites requests for client side routes to `index.html` file.
   ## Requests exempt from rewrite
   The fallback algorithm is limited only to certain requests. In particular
