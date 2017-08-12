@@ -61,7 +61,8 @@ defmodule PhoenixHisto do
       _ = accepts(conn, ["html"])
       true
     rescue
-      Phoenix.NotAcceptableError -> false
+      Phoenix.NotAcceptableError ->
+        false
     end
   end
 
@@ -81,7 +82,8 @@ defmodule PhoenixHisto do
     if conn.method in @allowed_methods
       and not file_request?(conn)
       and html_accepted?(conn)
-      and not blacklisted?(conn, blacklist) do
+      and not blacklisted?(conn, blacklist)
+    do
       %Plug.Conn{conn | path_info: index_path}
       |> Plug.Static.call(static_opts)
     else
