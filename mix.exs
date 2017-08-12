@@ -15,7 +15,7 @@ defmodule PhoenixHisto.Mixfile do
       source_url: "https://github.com/lukaszsamson/phoenix_histo",
       docs: [extras: ["README.md"], main: "readme",
             source_ref: "v#{@version}",
-            source_url: "https://github.com/elixir-plug/plug"]]
+            source_url: "https://github.com/elixir-plug/plug"]
     ]
   end
 
