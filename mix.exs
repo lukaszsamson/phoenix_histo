@@ -26,7 +26,7 @@ defmodule PhoenixHisto.Mixfile do
   defp deps do
     [
       {:phoenix, "~> 1.2"},
-      {:ex_doc, "~> 0.14", only: :docs},
+      {:ex_doc, "~> 0.14", only: :dev},
     ]
   end
 
