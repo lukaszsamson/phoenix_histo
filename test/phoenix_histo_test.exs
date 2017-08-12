@@ -34,6 +34,20 @@ defmodule PhoenixHistoTest do
     assert get_resp_header(conn, "content-type")  == ["text/html"]
   end
 
+  test "rewrites root HEAD request" do
+    conn = call(conn(:head, "/"))
+    assert conn.status == 200
+    assert conn.resp_body == ""
+    assert get_resp_header(conn, "content-type")  == ["text/html"]
+  end
+
+  test "rewrites client route HEAD request" do
+    conn = call(conn(:head, "/client/route"))
+    assert conn.status == 200
+    assert conn.resp_body == ""
+    assert get_resp_header(conn, "content-type")  == ["text/html"]
+  end
+
   test "does not rewrite POST requests" do
     conn = call(conn(:post, "/client/route"))
     assert conn.status == 404
