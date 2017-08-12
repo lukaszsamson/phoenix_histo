@@ -39,7 +39,7 @@ defmodule PhoenixHisto.Mixfile do
   defp package do
     [
       name: :phoenix_histo,
-      files: ["lib", "priv", "mix.exs", "README*", "readme*", "LICENSE*", "license*"],
+      files: ["lib", "mix.exs", "README*", "LICENSE*"],
       maintainers: ["Łukasz Samson"],
       licenses: ["MIT"],
       links: %{"GitHub" => "https://github.com/lukaszsamson/phoenix_histo"},
