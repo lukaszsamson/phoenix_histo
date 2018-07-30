@@ -43,11 +43,12 @@ defmodule PhoenixHisto do
   def init(opts) do
     index = Keyword.get(opts, :index, "index.html")
 
-    static_opts = opts
-    |> Keyword.fetch!(:static_opts)
-    |> Keyword.put(:only, [index])
-    |> Keyword.delete(:only_matching)
-    |> Plug.Static.init
+    static_opts =
+      opts
+      |> Keyword.fetch!(:static_opts)
+      |> Keyword.put(:only, [index])
+      |> Keyword.delete(:only_matching)
+      |> Plug.Static.init()
 
     %{
       static_opts: static_opts,
@@ -75,20 +76,16 @@ defmodule PhoenixHisto do
 
   defp blacklisted?(conn, blacklist) do
     blacklist
-    |> Enum.any?(& conn.request_path |> String.starts_with?(&1))
+    |> Enum.any?(&(conn.request_path |> String.starts_with?(&1)))
   end
 
   def call(conn, %{static_opts: static_opts, blacklist: blacklist, index_path: index_path}) do
-    if conn.method in @allowed_methods
-      and not file_request?(conn)
-      and html_accepted?(conn)
-      and not blacklisted?(conn, blacklist)
-    do
+    if conn.method in @allowed_methods and not file_request?(conn) and html_accepted?(conn) and
+         not blacklisted?(conn, blacklist) do
       %Plug.Conn{conn | path_info: index_path}
       |> Plug.Static.call(static_opts)
     else
       conn
     end
   end
-
 end

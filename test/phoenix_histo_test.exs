@@ -5,17 +5,18 @@ defmodule PhoenixHistoTest do
   defmodule MyPlug do
     use Plug.Builder
 
-    plug PhoenixHisto,
+    plug(PhoenixHisto,
       static_opts: [
         at: "/",
         from: Path.expand("fixtures", __DIR__),
-        gzip: false,
+        gzip: false
       ],
       blacklist: ["/api"]
-    plug :passthrough
+    )
 
-    defp passthrough(conn, _), do:
-      Plug.Conn.send_resp(conn, 404, "Passthrough")
+    plug(:passthrough)
+
+    defp passthrough(conn, _), do: Plug.Conn.send_resp(conn, 404, "Passthrough")
   end
 
   defp call(conn), do: MyPlug.call(conn, [])
@@ -24,28 +25,28 @@ defmodule PhoenixHistoTest do
     conn = call(conn(:get, "/"))
     assert conn.status == 200
     assert conn.resp_body =~ "Fixture index"
-    assert get_resp_header(conn, "content-type")  == ["text/html"]
+    assert get_resp_header(conn, "content-type") == ["text/html"]
   end
 
   test "rewrites client route and serves index.html" do
     conn = call(conn(:get, "/client/route"))
     assert conn.status == 200
     assert conn.resp_body =~ "Fixture index"
-    assert get_resp_header(conn, "content-type")  == ["text/html"]
+    assert get_resp_header(conn, "content-type") == ["text/html"]
   end
 
   test "rewrites root HEAD request" do
     conn = call(conn(:head, "/"))
     assert conn.status == 200
     assert conn.resp_body == ""
-    assert get_resp_header(conn, "content-type")  == ["text/html"]
+    assert get_resp_header(conn, "content-type") == ["text/html"]
   end
 
   test "rewrites client route HEAD request" do
     conn = call(conn(:head, "/client/route"))
     assert conn.status == 200
     assert conn.resp_body == ""
-    assert get_resp_header(conn, "content-type")  == ["text/html"]
+    assert get_resp_header(conn, "content-type") == ["text/html"]
   end
 
   test "does not rewrite POST requests" do
@@ -61,9 +62,11 @@ defmodule PhoenixHistoTest do
   end
 
   test "does not rewrite if text/html not accepted" do
-    conn = conn(:get, "/client/route")
-    |> put_req_header("accept", "application/json")
-    |> call
+    conn =
+      conn(:get, "/client/route")
+      |> put_req_header("accept", "application/json")
+      |> call
+
     assert conn.status == 404
     assert conn.resp_body == "Passthrough"
   end
@@ -73,5 +76,4 @@ defmodule PhoenixHistoTest do
     assert conn.status == 404
     assert conn.resp_body == "Passthrough"
   end
-
 end

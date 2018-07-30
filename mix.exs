@@ -1,7 +1,7 @@
 defmodule PhoenixHisto.Mixfile do
   use Mix.Project
 
-  @version "1.0.0"
+  @version "1.0.1"
 
   def project do
     [
@@ -13,9 +13,12 @@ defmodule PhoenixHisto.Mixfile do
       package: package(),
       name: "PhoenixHisto",
       source_url: "https://github.com/lukaszsamson/phoenix_histo",
-      docs: [extras: ["README.md"], main: "readme",
-            source_ref: "v#{@version}",
-            source_url: "https://github.com/elixir-plug/plug"]
+      docs: [
+        extras: ["README.md"],
+        main: "readme",
+        source_ref: "v#{@version}",
+        source_url: "https://github.com/lukaszsamson/phoenix_histo"
+      ]
     ]
   end
 
@@ -26,7 +29,7 @@ defmodule PhoenixHisto.Mixfile do
   defp deps do
     [
       {:phoenix, "~> 1.2"},
-      {:ex_doc, "~> 0.14", only: :dev},
+      {:ex_doc, "~> 0.14", only: :dev}
     ]
   end
 
@@ -39,10 +42,10 @@ defmodule PhoenixHisto.Mixfile do
   defp package do
     [
       name: :phoenix_histo,
-      files: ["lib", "mix.exs", "README*", "LICENSE*"],
+      files: ["lib", "mix.exs", ".formatter.exs", "README*", "LICENSE*"],
       maintainers: ["Łukasz Samson"],
       licenses: ["MIT"],
-      links: %{"GitHub" => "https://github.com/lukaszsamson/phoenix_histo"},
+      links: %{"GitHub" => "https://github.com/lukaszsamson/phoenix_histo"}
     ]
   end
 end
