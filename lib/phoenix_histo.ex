@@ -40,6 +40,7 @@ defmodule PhoenixHisto do
   @behaviour Plug
   @allowed_methods ~w(GET HEAD)
 
+  @impl true
   def init(opts) do
     index = Keyword.get(opts, :index, "index.html")
 
@@ -79,6 +80,7 @@ defmodule PhoenixHisto do
     |> Enum.any?(&(conn.request_path |> String.starts_with?(&1)))
   end
 
+  @impl true
   def call(conn, %{static_opts: static_opts, blacklist: blacklist, index_path: index_path}) do
     if conn.method in @allowed_methods and not file_request?(conn) and html_accepted?(conn) and
          not blacklisted?(conn, blacklist) do
