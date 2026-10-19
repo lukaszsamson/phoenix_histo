@@ -9,6 +9,7 @@ defmodule PhoenixHisto.Mixfile do
       version: @version,
       elixir: "~> 1.3",
       deps: deps(),
+      dialyzer: [plt_local_path: "priv/plts", plt_core_path: "priv/plts"],
       description: description(),
       package: package(),
       name: "PhoenixHisto",
@@ -28,6 +29,8 @@ defmodule PhoenixHisto.Mixfile do
 
   defp deps do
     [
+      {:dialyxir, "~> 1.4", only: [:dev, :test], runtime: false},
+      {:spec_lint, "~> 0.1", only: [:dev, :test], runtime: false},
       {:phoenix, "~> 1.2"},
       {:ex_doc, "~> 0.14", only: :dev}
     ]
