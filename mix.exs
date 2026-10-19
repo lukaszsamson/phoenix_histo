@@ -28,6 +28,7 @@ defmodule PhoenixHisto.Mixfile do
 
   defp deps do
     [
+      {:spec_lint, "~> 0.1", only: [:dev, :test], runtime: false},
       {:phoenix, "~> 1.2"},
       {:ex_doc, "~> 0.14", only: :dev}
     ]
