@@ -81,7 +81,11 @@ defmodule PhoenixHisto do
   end
 
   @impl true
-  def call(conn, %{static_opts: static_opts, blacklist: blacklist, index_path: index_path}) do
+  def call(%Plug.Conn{} = conn, %{
+        static_opts: static_opts,
+        blacklist: blacklist,
+        index_path: index_path
+      }) do
     if conn.method in @allowed_methods and not file_request?(conn) and html_accepted?(conn) and
          not blacklisted?(conn, blacklist) do
       %Plug.Conn{conn | path_info: index_path}
